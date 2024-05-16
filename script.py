@@ -8,7 +8,7 @@ print(os.listdir())
 from my_test_function import my_function
 
 print(my_function("hello world"))
-
+print("HELLO WORLD")
 
 # Replace with your own test suite
 SUITE_URL = "https://dev.platform.vals.ai/view?test_suite_id=38ed6d4b-4714-4630-a001-16238c16fc8b"
