@@ -30,6 +30,8 @@ runs:
         VALS_ENV: DEV
     - run: echo "$GITHUB_OUTPUT"
       shell: bash
+    - run: echo ${GITHUB_ACTION_PATH}
+      shell: bash
     - uses: actions/github-script@v7
       with:
         script: |
