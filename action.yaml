@@ -4,10 +4,6 @@ inputs:
   vals_api_key:
     description: "VALS AI Api Key (created in the Admin Console)"
     required: true
-  # open_ai_key:
-  #   description: "VALS AI Api Key (created in the Admin Console)"
-  #   required: true
-
 
 runs:
   using: "composite"
@@ -16,7 +12,11 @@ runs:
     - uses: actions/setup-python@v2
       with:
         python-version: "3.11"
+    # Install any local requirements
     - run: pip install -r requirements.txt
+      shell: bash
+    # Make sure vals is installed at minimum
+    - run: pip install -r ${GITHUB_ACTION_PATH}/requirements.txt
       shell: bash
     - id: run
       run: |
@@ -24,14 +24,8 @@ runs:
         python  ${GITHUB_ACTION_PATH}/script.py >> $GITHUB_OUTPUT
         echo 'EOF' >> $GITHUB_OUTPUT
       shell: bash
-      env: # Or as an environment variable
-        # OPEN_AI_KEY: ${{ inputs.open_ai_key }}
+      env:
         VALS_API_KEY: ${{ inputs.vals_api_key }}
-        VALS_ENV: DEV
-    - run: echo "$GITHUB_OUTPUT"
-      shell: bash
-    - run: echo ${GITHUB_ACTION_PATH}
-      shell: bash
     - uses: actions/github-script@v7
       with:
         script: |
