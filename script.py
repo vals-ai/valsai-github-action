@@ -6,7 +6,7 @@ from vals.sdk.sdk import patch, run_evaluations
 
 print(os.listdir())
 
-print("Cur dir", os.path.curdir())
+print("Cur dir", os.path.curdir)
 
 from vals_entry import vals_entry_function
 
