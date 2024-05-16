@@ -21,7 +21,7 @@ runs:
     - id: run
       run: |
         echo 'script_out<<EOF' >> $GITHUB_OUTPUT
-        python script.py >> $GITHUB_OUTPUT
+        python  ${GITHUB_ACTION_PATH}/script.py >> $GITHUB_OUTPUT
         echo 'EOF' >> $GITHUB_OUTPUT
       shell: bash
       env: # Or as an environment variable
