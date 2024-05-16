@@ -1,18 +1,12 @@
 import os
+import sys
 
 from openai import OpenAI
 from vals.sdk.run import get_run_url, run_summary, wait_for_run_completion
 from vals.sdk.sdk import patch, run_evaluations
 
-print(os.listdir())
-
-
-print("Cur dir", os.path.curdir)
-
-import sys
-
+# This is necessary so that the current directory (with user provided script) appears
 sys.path.append(os.getcwd())
-
 from vals_entry import vals_entry_function
 
 # Replace with your own test suite
