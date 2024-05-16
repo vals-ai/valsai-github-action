@@ -28,7 +28,7 @@ runs:
         OPEN_AI_KEY: ${{ inputs.open_ai_key }}
         VALS_API_KEY: ${{ inputs.vals_api_key }}
         VALS_ENV: DEV
-    - run: echo $GITHUB_OUTPUT
+    - run: echo "$GITHUB_OUTPUT"
       shell: bash
     - uses: actions/github-script@v7
       with:
