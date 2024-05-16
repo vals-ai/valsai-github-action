@@ -4,6 +4,12 @@ from openai import OpenAI
 from vals.sdk.run import get_run_url, run_summary, wait_for_run_completion
 from vals.sdk.sdk import patch, run_evaluations
 
+print(os.listdir())
+from my_test_function import my_function
+
+print(my_function("hello world"))
+
+
 # Replace with your own test suite
 SUITE_URL = "https://dev.platform.vals.ai/view?test_suite_id=38ed6d4b-4714-4630-a001-16238c16fc8b"
 

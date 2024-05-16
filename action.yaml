@@ -1,7 +1,7 @@
 name: valsai_github_action
 description: 'Vals AI Github Action'
 inputs:
-  api_key:
+  vals_api_key:
     description: "VALS AI Api Key (created in the Admin Console)"
     required: true
   open_ai_key:
@@ -26,7 +26,7 @@ runs:
       shell: bash
       env: # Or as an environment variable
         OPEN_AI_KEY: ${{ inputs.open_ai_key }}
-        VALS_API_KEY: ${{ inputs.api_key }}
+        VALS_API_KEY: ${{ inputs.vals_api_key }}
         VALS_ENV: DEV
     - uses: actions/github-script@v7
       with:
