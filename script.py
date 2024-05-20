@@ -9,14 +9,12 @@ from vals.sdk.sdk import patch, run_evaluations
 sys.path.append(os.getcwd())
 from vals_entry import vals_entry_function
 
-# Replace with your own test suite
-SUITE_URL = "https://dev.platform.vals.ai/view?test_suite_id=38ed6d4b-4714-4630-a001-16238c16fc8b"
-
-client = patch(OpenAI(api_key=os.environ.get("OPEN_AI_KEY")))
+# Read the suite url from
+suite_url = sys.argv[1]
 
 # Run the test suite
 run_id = run_evaluations(
-    SUITE_URL,
+    suite_url,
     vals_entry_function,
     verbosity=0,
 )

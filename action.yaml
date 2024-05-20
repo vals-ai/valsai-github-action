@@ -4,6 +4,9 @@ inputs:
   vals_api_key:
     description: "VALS AI Api Key (created in the Admin Console)"
     required: true
+  suite_link:
+    description: "Vals AI test suite (created in the /suite page)"
+    required: true
 
 runs:
   using: "composite"
@@ -12,8 +15,8 @@ runs:
     - uses: actions/setup-python@v2
       with:
         python-version: "3.11"
-    # Install any local requirements
-    - run: pip install -r requirements.txt
+    # Install any local requirements (if there is a requirements.txt present)
+    - run: "[ -f requirements.txt ] && pip install -r requirements.txt"
       shell: bash
     # Make sure vals is installed at minimum
     - run: pip install -r ${GITHUB_ACTION_PATH}/requirements.txt
@@ -21,7 +24,7 @@ runs:
     - id: run
       run: |
         echo 'script_out<<EOF' >> $GITHUB_OUTPUT
-        python  ${GITHUB_ACTION_PATH}/script.py >> $GITHUB_OUTPUT
+        python  ${GITHUB_ACTION_PATH}/script.py ${{inputs.suite_link}} >> $GITHUB_OUTPUT
         echo 'EOF' >> $GITHUB_OUTPUT
       shell: bash
       env:
