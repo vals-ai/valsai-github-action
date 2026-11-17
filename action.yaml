@@ -11,15 +11,22 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
+    - uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2.8.0
+    - uses: actions/setup-python@e9aba2c848f5ebd159c070c61ea2c4e2b122355e # v2.3.4
       with:
         python-version: "3.11"
+    - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+      with:
+        version: "0.13.7"
+        enable-cache: false
     # Install any local requirements (if there is a requirements.txt present)
-    - run: "[ -f requirements.txt ] && pip install -r requirements.txt"
+    - run: |
+        if [ -f requirements.txt ]; then
+          uv pip install --system --exclude-newer "7 days" --exclude-newer-package valsai=false --exclude-newer-package model-library=false -r requirements.txt
+        fi
       shell: bash
     # Make sure vals is installed at minimum
-    - run: pip install -r ${GITHUB_ACTION_PATH}/requirements.txt
+    - run: uv pip install --system --exclude-newer "7 days" --exclude-newer-package valsai=false -r ${GITHUB_ACTION_PATH}/requirements.txt
       shell: bash
     - id: run
       run: |
@@ -29,7 +36,7 @@ runs:
       shell: bash
       env:
         VALS_API_KEY: ${{ inputs.vals_api_key }}
-    - uses: actions/github-script@v7
+    - uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
       with:
         script: |
           github.rest.issues.createComment({
